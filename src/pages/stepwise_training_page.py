@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit.components.v1 import html
 
 st.title("Training Procedure")
 st.write("You will start with a training phase to familiarize yourself with the task. The training phases will guide you through the task requirements step-by-step.")
@@ -8,3 +9,13 @@ st.write("**IMPORTANT**: Please do not use any outside tools (e.g., Google, Chat
 
 if st.button("Next"):
     st.switch_page("pages/task_1_content_page.py")
+
+# Define your javascript
+my_js = """
+alert("Refreshing or navigating away throughout the study will cause you to lose your progress. Only use the buttons provided in the app to continue.");
+"""
+
+# Wrapt the javascript as html code
+my_html = f"<script>{my_js}</script>"
+
+html(my_html)

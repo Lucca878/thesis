@@ -9,7 +9,6 @@ st.write("Your task is to **rewrite** these statements with a specific task in m
 st.write("In total you will have **10** attempts per statement to decrease the **confidence score** of the AI's original prediction as much as possible. If you manage to change the original prediction (truthful or deceptive), you will immediately move on to the next statement.")
 st.write("There is one very important condition to be met: You must maintain the meaning of the original statement, be grammatically correct, and appear natural.")
 st.write("**Please read and rewrite the statements carefully.**")
-st.write("**IMPORTANT**: Please do not refresh the page or click the back button during the study, as it may cause errors in the system.")
 
 
 if st.button("Next"):

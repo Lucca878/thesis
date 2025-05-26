@@ -72,7 +72,7 @@ def feedback_page(text_container_1, feedback_container_1, progr_cont_1, text_con
         text_container_3.markdown(
             f"Rewrite this statement so that it appears **{opposite_classification}** to the AI.\n"
             "Please maintain the statement's **original meaning**, ensure that it is **grammatically correct**, and appears **natural**. A **natural** statement is coherent, fluent, and readable.\n"
-            "\n**IMPORTANT:** If the page does not respond, press submit again. DO NOT REFRESH THE PAGE."
+            "\n**IMPORTANT:** DO NOT REFRESH THE PAGE. If the page does not respond or you see a warning that your input is empty, press submit again."
         )
 
     # Return classifications to determine button visibility
@@ -142,10 +142,32 @@ elif st.session_state.main_task_1_submit_count >= 10:
 else:
     # Show "Retry" and "Submit" buttons if classifications are the same
     if 'submit_view' in st.session_state and st.session_state['submit_view'] == 1:
-        nav_col1 = st.empty()
-        nav_col2 = st.empty()
-        input_txt = input_container.text_area("Write your text below:", height=250, placeholder=current_repharsed_text)
-        submit_butt = submit_container.button('Submit', on_click=click_submit)
+    
+        # 1. Textarea
+        input_txt = st.text_area(
+            "Write your text below:",
+            height=250,
+            placeholder=current_repharsed_text,
+            key="input_txt"
+        )
+    
+        # 2. Inject JS to blur textarea on submit, right before the button
+        st.markdown("""
+        <script>
+        setTimeout(function() {
+            const submitBtn = window.parent.document.querySelector('button[key="submit"]');
+            if (submitBtn) {
+                submitBtn.addEventListener('mousedown', function() {
+                    const textareas = window.parent.document.querySelectorAll('textarea');
+                    textareas.forEach(t => t.blur());
+                });
+            }
+        }, 100);
+        </script>
+        """, unsafe_allow_html=True)
+    
+        # 3. Submit button
+        submit_butt = st.button('Submit', on_click=click_submit, key="submit")
 
     if 'submit_view' not in st.session_state or st.session_state['submit_view'] == 0:
         retry_butt = nav_col1.button("Retry", on_click=click_retry)

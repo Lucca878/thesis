@@ -41,7 +41,7 @@ with col3:
 
 # Define your javascript
 my_js = """
-alert("Refreshing or navigating away will cause you to lose your progress. Only use the buttons provided in the app to continue.");
+alert("Refreshing or navigating away throughout this study will cause you to lose your progress. Only use the buttons provided in the app to continue.");
 """
 
 # Wrapt the javascript as html code

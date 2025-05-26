@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit.components.v1 import html
 
 st.title("Main Task")
 st.write("You are now about to start the main task. Here is a reap of key points:")
@@ -16,3 +17,13 @@ st.write("**IMPORTANT**: Please do not use any outside tools (e.g., Google, Chat
 
 if st.button("Next"):
     st.switch_page("pages/experiment_intro_1_page.py")
+
+# Define your javascript
+my_js = """
+alert("Refreshing or navigating away throughout the study will cause you to lose your progress. Only use the buttons provided in the app to continue.");
+"""
+
+# Wrap the javascript as html code
+my_html = f"<script>{my_js}</script>"
+
+html(my_html)
